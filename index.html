@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<link rel="stylesheet" type="text/css" href="style.css">
+	<script src="http://code.jquery.com/jquery-latest.min.js"
+        type="text/javascript"></script>
+	<title>Your Soccer Team</title>
+	</head>
+<body>
+
+	<div id="pitch">
+			<p id="gkp"></p>
+			<p id="dfp"></p>
+			<p id="mdp"></p>
+			<p id="fwp"></p>
+	</div>
+
+	<aside>
+		<h1>Make Your Own Football Club</h1><br>	
+		<h3>Best GK of all time</h3>
+	
+			<input type="text"  id="gkFirstName" placeholder ="First Name">
+			<input type="text" id="gkLastName" placeholder = "Last Name">
+			<input type="numeric" id="gkId" placeholder="Number">
+			<input type="numeric" id="gkRating" placeholder="Rating(1-100)">
+			<button id="addGk">Add Player</button>
+			<button id="deleteGk">Delete Player</button>
+
+		<h3>Best DF of all time</h3>
+	
+			<input type="text"  id="dfFirstName" placeholder ="First Name">
+			<input type="text" id="dfLastName" placeholder = "Last Name">
+			<input type="numeric" id="dfId" placeholder="Number">
+			<input type="numeric" id="dfRating" placeholder="Rating(1-100)">
+			<button id="addDf">Add Player</button>
+			<button id="deleteDf">Delete Player</button>
+
+		<h3>Best MD of all time</h3>
+	
+			<input type="text"  id="mdFirstName" placeholder ="First Name">
+			<input type="text" id="mdLastName" placeholder = "Last Name">
+			<input type="numeric" id="mdPersonId" placeholder="Number">
+			<input type="numeric" id="mdRating" placeholder="Rating(1-100)">
+			<button id="addMd">Add Player</button>
+			<button id="deleteMd">Delete Player</button>
+
+		<h3>Best FW of all time</h3>
+	
+			<input type="text"  id="fwFirstName" placeholder ="First Name">
+			<input type="text" id="fwLastName" placeholder = "Last Name">
+			<input type="numeric" id="fwId" placeholder="Number">
+			<input type="numeric" id="fwRating" placeholder="Rating(1-100)">
+			<button id="addFw">Add Player</button>
+			<button id="deleteFw">Delete Player</button>
+
+	</aside>
+
+
+	
+	<script>
+	//GK
+	$("#addGk").on('click',function(){
+		const name = $("#gkFirstName").val();
+		const last = $("#gkLastName").val();
+		const rating = $('#gkRating').val();
+		const idp = $("#gkId").val();
+		$.ajax({
+			url :"users",
+			method :"post",
+			data :JSON.stringify({
+				fname :name,
+				lname :last,
+				rating:rating,
+				__id :idp
+			}),
+			contentType : "application/json",
+			success : function(data){
+				console.log(data);
+				const objData= JSON.parse(data);				
+			},
+			error : function(data){
+				console.log(data);
+			}
+		})
+		const findid = $('#gkId').val();
+		$.ajax({
+			url : "/users/" + findid,
+			method : "get",
+			contentType : "application/json",
+			success : function(data){
+				console.log(data);
+				const objData= JSON.parse(data);
+				$('#gkp').text(objData.fname + " " + objData.lname);
+
+			},
+			error : function(data){
+				console.log(data);
+			}
+		})
+
+	});
+		$('#deleteGk').on("click", function(){
+		$.ajax({
+			url : "/users/" + $('#gkId').val(),
+			method : "DELETE",
+			contentType : "application/json",
+			success : function(data){
+				console.log(data);
+				$('#gkp').html("");
+			},
+			error : function(data){
+				console.log(data);
+			}
+		})
+	});
+	//DF
+		$("#addDf").on('click',function(){
+		const name = $("#dfFirstName").val();
+		const last = $("#dfLastName").val();
+		const rating = $('#dfRating').val();
+		const idp = $("#dfId").val();
+		$.ajax({
+			url :"users",
+			method :"post",
+			data :JSON.stringify({
+				fname :name,
+				lname :last,
+				rating:rating,
+				__id :idp
+			}),
+			contentType : "application/json",
+			success : function(data){
+				console.log(data);
+				const objData= JSON.parse(data);				
+			},
+			error : function(data){
+				console.log(data);
+			}
+		})
+		//////
+			const findid = $('#dfId').val();
+		$.ajax({
+			url : "/users/" + findid,
+			method : "get",
+			contentType : "application/json",
+			success : function(data){
+				console.log(data);
+				const objData= JSON.parse(data);
+				$('#dfp').text(objData.fname + " " + objData.lname);
+			},
+			error : function(data){
+				console.log(data);
+			}
+		})
+
+	});
+			$('#deleteDf').on("click", function(){
+		$.ajax({
+			url : "/users/" + $('#dfId').val(),
+			method : "DELETE",
+			contentType : "application/json",
+			success : function(data){
+				console.log(data);
+				$('#dfp').html("");
+			},
+			error : function(data){
+				console.log(data);
+			}
+		})
+	});
+
+	//MD
+	$("#addMd").on('click',function(){
+		const name = $("#mdFirstName").val();
+		const last = $("#mdLastName").val();
+		const rating = $('#mdRating').val();
+		const idp = $("#mdId").val();
+		$.ajax({
+			url :"users",
+			method :"post",
+			data :JSON.stringify({
+				fname :name,
+				lname :last,
+				rating:rating,
+				__id :idp
+			}),
+			contentType : "application/json",
+			success : function(data){
+				console.log(data);
+				const objData= JSON.parse(data);				
+			},
+			error : function(data){
+				console.log(data);
+			}
+		})
+			const findid = $('#mdId').val();
+		$.ajax({
+			url : "/users/" + findid,
+			method : "get",
+			contentType : "application/json",
+			success : function(data){
+				console.log(data);
+				const objData= JSON.parse(data);
+				$('#mdp').text(objData.fname + " " + objData.lname);
+			},
+			error : function(data){
+				console.log(data);
+			}
+		})
+
+	});
+			$('#deleteMd').on("click", function(){
+		$.ajax({
+			url : "/users/" + $('#mdId').val(),
+			method : "DELETE",
+			contentType : "application/json",
+			success : function(data){
+				console.log(data);
+				$('#mdp').html("");
+			},
+			error : function(data){
+				console.log(data);
+			}
+		})
+	});
+	
+	//FW	
+	$("#addFw").on('click',function(){
+		const name = $("#fwFirstName").val();
+		const last = $("#fwLastName").val();
+		const rating = $('#fwRating').val();
+		const idp = $("#fwId").val();
+		$.ajax({
+			url :"users",
+			method :"post",
+			data :JSON.stringify({
+				fname :name,
+				lname :last,
+				rating:rating,
+				__id :idp
+			}),
+			contentType : "application/json",
+			success : function(data){
+				console.log(data);
+				const objData= JSON.parse(data);				
+			},
+			error : function(data){
+				console.log(data);
+			}
+		})
+			const findid = $('#fwId').val();
+		$.ajax({
+			url : "/users/" + findid,
+			method : "get",
+			contentType : "application/json",
+			success : function(data){
+				console.log(data);
+				const objData= JSON.parse(data);
+				$('#fwp').text(objData.fname + " " + objData.lname);
+			},
+			error : function(data){
+				console.log(data);
+			}
+		})
+
+	});
+	$('#deleteFw').on("click", function(){
+		$.ajax({
+			url : "/users/" + $('#fwId').val(),
+			method : "DELETE",
+			contentType : "application/json",
+			success : function(data){
+				console.log(data);
+				$('#fwp').html("");
+			},
+			error : function(data){
+				console.log(data);
+			}
+		})
+	});
+			
+
+
+	// $('#updatePerson').on("click", function(){
+	// 	const name = $("#firstName").val();
+	// 	const last = $("#lastName").val();
+	// 	const idp = $("#personId").val();
+	// 	$.ajax({
+	// 		url : "users",
+	// 		method : "put",
+	// 		data :JSON.stringify({
+	// 			fname :name,
+	// 			lname :last,
+	// 			__id  :idp
+	// 		}),
+	// 		contentType : "application/json",
+	// 		success : function(data){
+	// 			console.log(data);
+	// 			alert("Updated");
+	// 		},
+	// 		error : function(){
+	// 			console.log("ERROR");
+	// 		}
+	// 	})
+	// });
+
+	// $('#showAll').on('click', function(){
+	// 	$.ajax({
+	// 		url : 'users/all',
+	// 		method : 'get',
+	// 		success : function(data){
+	// 			const allData = JSON.parse(data);
+	// 			const keys = Object.keys(allData);
+	// 			keys.forEach(function(item){
+	// 				document.write("Person ID : " + allData[item].__id 
+	// 					+ "<br>" +" Person's first Name : " + allData[item].fname 
+	// 					+ "<br>" + " Person's last Name : " + allData[item].lname+'<br>');
+	// 			});
+	// 		},
+	// 		error : function(){
+	// 			alert("ERROR");
+	// 		}
+	// 	})
+	// });
+			
+	</script>	
+</body>
+</html>
